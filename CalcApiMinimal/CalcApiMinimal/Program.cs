@@ -10,6 +10,7 @@ public class Program
 
         // Add services to the container.
         builder.Services.AddSingleton<Calculator>();
+        builder.Services.AddSingleton<ExtendedCalculator>();
         builder.Services.AddOpenApi();
         builder.Services.AddSwaggerGen(c =>
         {
@@ -30,7 +31,8 @@ public class Program
         app.MapGet("/calculator/multiply", (double a, double b, Calculator calculator) => calculator.Multiply(a, b));
         app.MapGet("/calculator/divide", (double a, double b, Calculator calculator) => calculator.Divide(a, b));
         app.MapGet("/calculator/subtract", (double a, double b, Calculator calculator) => calculator.Subtract(a, b));
-
+        app.MapGet("/extendedCalculator/calculatePower", (double a, double b, ExtendedCalculator extendedCalculator) => extendedCalculator.CalculatePower(a, b));
+        
         app.Run();
     }
 }
