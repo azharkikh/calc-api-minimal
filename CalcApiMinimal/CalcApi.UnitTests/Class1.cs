@@ -7,16 +7,9 @@ namespace CalcApi.UnitTests;
 [TestFixture]
 public class CalcTests
 {
-    public Calculator? Calculator { get; set; }
-    public ExtendedCalculator? ExtendedCalculator { get; set; }
+    private readonly Calculator _calculator = new();
+    private readonly ExtendedCalculator _extendedCalculator = new();
 
-    [SetUp]
-    public void Setup()
-    {
-        Calculator = new Calculator();
-        ExtendedCalculator = new ExtendedCalculator();
-    }
-    
     [TestCase("Multiply", 2, 3, 6)]
     [TestCase("Add", 2, 3, 5)]
     [TestCase("Divide", 4, 2, 2)]
@@ -33,19 +26,19 @@ public class CalcTests
         switch (operation)
         {
             case "Multiply":
-                z = Calculator.Multiply(x, y);
+                z = _calculator.Multiply(x, y);
                 break;
             case "Add":
-                z = Calculator.Add(x, y);
+                z = _calculator.Add(x, y);
                 break;
             case "Divide":
-                z = Calculator.Divide(x, y);
+                z = _calculator.Divide(x, y);
                 break;
             case "Subtract":
-                z = Calculator.Subtract(x, y);
+                z = _calculator.Subtract(x, y);
                 break;
             case "CalculatePower": 
-                z = ExtendedCalculator.CalculatePower(x, y);
+                z = _extendedCalculator.CalculatePower(x, y);
                 break;
             default:                                                                                                                                                         
                 throw new ArgumentException($"Unknown operation: {operation}");   
