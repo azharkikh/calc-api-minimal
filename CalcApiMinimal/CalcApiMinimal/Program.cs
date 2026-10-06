@@ -1,3 +1,4 @@
+using CalcApiMinimal.Validation;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace CalcApiMinimal;
@@ -12,6 +13,7 @@ public class Program
         builder.Services.AddSingleton<Calculator>();
         builder.Services.AddSingleton<ExtendedCalculator>();
         builder.Services.AddOpenApi();
+        builder.Services.AddValidation();
         builder.Services.AddSwaggerGen(c =>
         {
             c.SwaggerDoc("v1", new() { Title = "Calculator API", Version = "v1" });
@@ -29,7 +31,7 @@ public class Program
 
         app.MapGet("/calculator/add", (double a, double b, Calculator calculator) => calculator.Add(a, b));
         app.MapGet("/calculator/multiply", (double a, double b, Calculator calculator) => calculator.Multiply(a, b));
-        app.MapGet("/calculator/divide", (double a, double b, Calculator calculator) => calculator.Divide(a, b));
+        app.MapGet("/calculator/divide", (double a, [NotZero] double b, Calculator calculator) => calculator.Divide(a, b));
         app.MapGet("/calculator/subtract", (double a, double b, Calculator calculator) => calculator.Subtract(a, b));
         app.MapGet("/extendedCalculator/calculatePower", (double a, double b, ExtendedCalculator extendedCalculator) => extendedCalculator.CalculatePower(a, b));
         

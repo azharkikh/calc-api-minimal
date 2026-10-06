@@ -16,8 +16,7 @@ public class Calculator
     {
         if (b == 0)
         {
-            Console.WriteLine("Ошибка: Деление на ноль.");
-            return 1111;
+            throw new ArgumentOutOfRangeException(nameof(b), "Деление на ноль.");
         }
 
         return a / b;
