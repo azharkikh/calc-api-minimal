@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="CalcApi.Integration.Tests\CalcApi.Integration.Tests.csproj" Type="Classic C#" />
   <Project Path="CalcApi.UnitTests\CalcApi.UnitTests.csproj" Type="Classic C#" />
   <Project Path="CalcApiMinimal/CalcApiMinimal.csproj" />
 </Solution>
