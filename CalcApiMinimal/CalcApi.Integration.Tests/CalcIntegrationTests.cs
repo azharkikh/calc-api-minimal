@@ -5,20 +5,20 @@ using NUnit.Framework;
 namespace CalcApi.Integration.Tests;
 
 [TestFixture]
-public class IntegrationTests
+public class CalcIntegrationTests
 {
     
-    private WebApplicationFactory<Program> program;
+    private readonly WebApplicationFactory<Program> _program;
     
-    public IntegrationTests()
+    public CalcIntegrationTests()
     {
-        program = new WebApplicationFactory<Program>();
+        _program = new WebApplicationFactory<Program>();
     }
 
     [OneTimeTearDownAttribute]
     public void OneTimeTearDownAttribute()
     {
-        program.Dispose();
+        _program.Dispose();
     }
     
     [TestCase("Add", 2, 3, 5)]
@@ -28,7 +28,7 @@ public class IntegrationTests
     [TestCase("CalculatePower", 2, 3, 8)] 
     public async Task OperationTest(string operation, double x, double y, double expected)
     {
-        var client = program.CreateClient();
+        var client = _program.CreateClient();
         
         HttpResponseMessage result;
 
