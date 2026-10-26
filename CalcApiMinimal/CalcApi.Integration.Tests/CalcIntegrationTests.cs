@@ -1,26 +1,13 @@
-﻿using CalcApiMinimal;
+﻿using CalcApi.Integration.Tests.baseClasses;
+using CalcApiMinimal;
 using Microsoft.AspNetCore.Mvc.Testing;
 using NUnit.Framework;
 
 namespace CalcApi.Integration.Tests;
 
 [TestFixture]
-public class CalcIntegrationTests
+public class CalcIntegrationTests : WebApplicationFactoryBase
 {
-    
-    private readonly WebApplicationFactory<Program> _program;
-    
-    public CalcIntegrationTests()
-    {
-        _program = new WebApplicationFactory<Program>();
-    }
-
-    [OneTimeTearDownAttribute]
-    public void OneTimeTearDownAttribute()
-    {
-        _program.Dispose();
-    }
-    
     [TestCase("Add", 2, 3, 5)]
     [TestCase("Multiply", 2, 3, 6)]
     [TestCase("Divide", 4, 2, 2)]
@@ -28,7 +15,7 @@ public class CalcIntegrationTests
     [TestCase("CalculatePower", 2, 3, 8)] 
     public async Task OperationTest(string operation, double x, double y, double expected)
     {
-        var client = _program.CreateClient();
+        var client = Factory.CreateClient();
         
         HttpResponseMessage result;
 
